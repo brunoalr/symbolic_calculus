@@ -1,5 +1,6 @@
 #include <cmath>
 #include <iostream>
+#include <functional>
 #include <utility>
 
 namespace symbolic
