@@ -1,10 +1,5 @@
-#include <cmath> // for std::sin etc
-#include <functional> // for std::compare_three_way etc
-#include <iostream>
-#include <memory> // for std::addressof
-#include <type_traits> // for std::type_identity, std::is_lvalue_reference_v, std::remove_reference_t, std::is_rvalue_reference_v<T>, std::conditional etc
-#include <utility> // for std::forward, std::index_sequence_for
-
+#ifndef UTILS_H
+#define UTILS_H
 
 namespace symbolic
 {
@@ -239,46 +234,6 @@ namespace symbolic
     {
     };
 
-    template <symbolic Expression>
-    struct formula
-    {
-        // Types and constants
-        using expression = Expression;
-
-        // Constructors
-        constexpr formula(Expression) noexcept {}
-
-        // Call operator where substitution happens
-        template <class... Args>
-        constexpr auto operator()(Args... args) const noexcept
-        {
-            return expression{}(substitution(args...));
-        }
-    };
-
-    template <class Trait = unconstrained, auto Id = symbol_id<decltype([] {})>{}>
-    struct symbol
-    {
-        // Unique identifier
-        static constexpr auto id = Id;
-
-        // Binding mechanism
-        // clang-format off
-        template <class Arg>
-        requires Trait::template trait<std::remove_cvref_t<Arg>>::value
-        constexpr symbol_binder<symbol, Arg &&> operator=(Arg &&arg) const
-        {
-            return symbol_binder(*this, std::forward<Arg>(arg));
-        }
-        // clang-format on
-
-        template <class... Binders>
-        constexpr auto operator()(const substitution<Binders...> &s) const
-        {
-            return s[id](); // <- Everything happens here
-        }
-    };
-
     template <symbolic Lhs, symbolic Rhs>
     constexpr symbolic_expression<std::plus<void>, Lhs, Rhs> operator+(Lhs, Rhs)
     {
@@ -336,32 +291,6 @@ namespace symbolic
     {
         return {};
     }
-
-    // Specialization for variable symbol
-    template <class T, auto Id>
-    struct is_symbolic<symbol<T, Id>> : std::true_type
-    {
-    };
-
 } // namespace symbolic
 
-using namespace symbolic;
-
-int main()
-{
-    constexpr symbol<real> a;
-    constexpr symbol<real> w;
-    constexpr symbol<real> t;
-    constexpr symbol<real> phi;
-
-    constexpr formula f = a * sin(w * t + phi);
-    const auto y = f(a = 5.0, w = 2.5, t = 1.6, phi = 0.0);
-
-    constexpr formula f2 = exp(a);
-    const double y2 = f2(a = y);
-
-    std::cout << y << std::endl;
-    std::cout << y2 << std::endl;
-
-    return 0;
-}
+#endif //UTILS_H
