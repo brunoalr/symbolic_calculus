@@ -1,0 +1,1 @@
+Implementation of https://github.com/CppCon/CppCon2023/blob/main/Presentations/Symbolic_Calculus_for_High_Performance_Computing_from_Scratch_using_Cpp23_CppCon_2023_Vincent_Reverdy.pdf and https://www.youtube.com/watch?v=lPfA4SFojao&t=212s
