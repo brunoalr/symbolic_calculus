@@ -4,6 +4,7 @@
 #include <type_traits> // for std::type_identity, std::is_lvalue_reference_v, std::remove_reference_t, std::is_rvalue_reference_v<T>, std::conditional etc
 #include <utility> // for std::forward, std::index_sequence_for
 
+#include "symbol_id.h"
 #include "utils.h"
 
 namespace symbolic
