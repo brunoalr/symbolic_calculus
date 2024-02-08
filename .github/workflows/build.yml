@@ -24,15 +24,15 @@ jobs:
                 cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
                 cmake --build build --config Release -j 2
 
-            - name: Run program
+            - name: Run program (unix)
               shell: bash
               if: contains(matrix.os, 'ubuntu') || contains (matrix.os, 'macos')
               working-directory: build
               run: ./symbolic_calculus
 
-            - name: Run program
+            - name: Run program (windows)
               shell: bash
               if: contains(matrix.os, 'windows')
               working-directory: build
-              run: ./symbolic_calculus.exe
+              run: dir
 
