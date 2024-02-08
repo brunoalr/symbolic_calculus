@@ -1,6 +1,7 @@
 #ifndef FORMULA_H
 #define FORMULA_H
 
+#include "substitution.h"
 #include "utils.h"
 
 namespace symbolic

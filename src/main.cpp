@@ -2,6 +2,7 @@
 
 #include "formula.h"
 #include "symbol.h"
+#include "symbolic_expression.h"
 
 using namespace symbolic;
 
