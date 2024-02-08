@@ -276,25 +276,25 @@ namespace symbolic
     };
 
     template <symbolic Lhs, symbolic Rhs>
-    constexpr symbolic_expression<std::plus<>, Lhs, Rhs> operator+(Lhs, Rhs)
+    constexpr symbolic_expression<std::plus<void>, Lhs, Rhs> operator+(Lhs, Rhs)
     {
         return {};
     }
 
     template <symbolic Lhs, symbolic Rhs>
-    constexpr symbolic_expression<std::minus<>, Lhs, Rhs> operator-(Lhs, Rhs)
+    constexpr symbolic_expression<std::minus<void>, Lhs, Rhs> operator-(Lhs, Rhs)
     {
         return {};
     }
 
     template <symbolic Lhs, symbolic Rhs>
-    constexpr symbolic_expression<std::multiplies<>, Lhs, Rhs> operator*(Lhs, Rhs)
+    constexpr symbolic_expression<std::multiplies<void>, Lhs, Rhs> operator*(Lhs, Rhs)
     {
         return {};
     }
 
     template <symbolic Lhs, symbolic Rhs>
-    constexpr symbolic_expression<std::divides<>, Lhs, Rhs> operator/(Lhs, Rhs)
+    constexpr symbolic_expression<std::divides<void>, Lhs, Rhs> operator/(Lhs, Rhs)
     {
         return {};
     }
