@@ -5,32 +5,25 @@ on:
   workflow_call:
 
 jobs:
-    build:
-        name: Build
-        strategy:
-            fail-fast: false
-            matrix:
-                os: [ ubuntu-latest, macos-13, windows-latest ]
-        runs-on: ${{ matrix.os }}
-        steps:
-            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
-              with:
-                fetch-depth: 1
-                fetch-tags: true
+  build:
+    name: Build
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-20.04, ubuntu-22.04, macos-12, macos-13, windows-2019, windows-2022 ]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+        with:
+          fetch-depth: 1
 
-            - name: Build
-              shell: bash
-              run: |
-                cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
-                cmake --build build --config Release --target install -j 2
+      - name: Build
+        shell: bash
+        run: |
+          cmake -S . -B build -DCMAKE_INSTALL_PREFIX=out -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release --target install -j 2
 
-            - name: Run program (unix)
-              shell: bash
-              if: contains(matrix.os, 'ubuntu') || contains (matrix.os, 'macos')
-              run: out/symbolic_calculus/symbolic_calculus
-
-            - name: Run program (windows)
-              shell: bash
-              if: contains(matrix.os, 'windows')
-              run: out/symbolic_calculus/symbolic_calculus
+      - name: Run program
+        shell: bash
+        run: out/symbolic_calculus/symbolic_calculus
 
