@@ -26,6 +26,13 @@ jobs:
 
             - name: Run program
               shell: bash
+              if: contains(matrix.os, 'ubuntu') || contains (matrix.os, 'macos')
               working-directory: build
               run: ./symbolic_calculus
+
+            - name: Run program
+              shell: bash
+              if: contains(matrix.os, 'windows')
+              working-directory: build
+              run: ./symbolic_calculus.exe
 
