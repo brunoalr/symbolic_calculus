@@ -1,7 +1,10 @@
-#include <cmath>
+#include <cmath> // for std::sin etc
+#include <functional> // for std::compare_three_way etc
 #include <iostream>
-#include <functional>
-#include <utility>
+#include <memory> // for std::addressof
+#include <type_traits> // for std::type_identity, std::is_lvalue_reference_v, std::remove_reference_t, std::is_rvalue_reference_v<T>, std::conditional etc
+#include <utility> // for std::forward, std::index_sequence_for
+
 
 namespace symbolic
 {
@@ -144,7 +147,7 @@ namespace symbolic
     inline constexpr index_constant<I> index = {};
 
     // An indexed substitution element
-    template <std::size_t I, class  B>
+    template <std::size_t I, class B>
     struct substitution_element
     {
         // Types and constants

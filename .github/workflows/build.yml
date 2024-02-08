@@ -27,12 +27,12 @@ jobs:
             - name: Run program (unix)
               shell: bash
               if: contains(matrix.os, 'ubuntu') || contains (matrix.os, 'macos')
-              working-directory: build
+              working-directory: out/symbolic_calculus
               run: ./symbolic_calculus
 
             - name: Run program (windows)
               shell: bash
               if: contains(matrix.os, 'windows')
-              working-directory: build
-              run: dir
+              working-directory: out/symbolic_calculus
+              run: ./symbolic_calculus
 

@@ -8,3 +8,6 @@ set(CMAKE_CXX_EXTENSIONS False)
 add_compile_options("$<$<PLATFORM_ID:Linux,Darwin>:-Wall;-Wextra;-Werror;-pedantic;>")
 
 add_executable(symbolic_calculus main.cpp)
+
+install(TARGETS ${PROJECT_NAME}
+        RUNTIME DESTINATION symbolic_calculus)
