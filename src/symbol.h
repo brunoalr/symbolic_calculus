@@ -4,6 +4,7 @@
 #include <type_traits> // for std::type_identity, std::is_lvalue_reference_v, std::remove_reference_t, std::is_rvalue_reference_v<T>, std::conditional etc
 #include <utility> // for std::forward, std::index_sequence_for
 
+#include "symbol_binder.h"
 #include "symbol_id.h"
 #include "utils.h"
 
@@ -17,12 +18,12 @@ namespace symbolic
 
         // Binding mechanism
         // clang-format off
-    template <class Arg>
-    requires Trait::template trait<std::remove_cvref_t<Arg>>::value
-    constexpr symbol_binder<symbol, Arg &&> operator=(Arg &&arg) const
-    {
-      return symbol_binder(*this, std::forward<Arg>(arg));
-    }
+        template <class Arg>
+        requires Trait::template trait<std::remove_cvref_t<Arg>>::value
+        constexpr symbol_binder<symbol, Arg &&> operator=(Arg &&arg) const
+        {
+          return symbol_binder(*this, std::forward<Arg>(arg));
+        }
         // clang-format on
 
         template <class... Binders>
