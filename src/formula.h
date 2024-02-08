@@ -2,7 +2,7 @@
 #define FORMULA_H
 
 #include "substitution.h"
-#include "utils.h"
+#include "traits.h"
 
 namespace symbolic
 {

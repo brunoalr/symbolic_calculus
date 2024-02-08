@@ -4,8 +4,6 @@
 #include <functional> // for std::compare_three_way etc
 #include <memory> // for std::addressof
 
-#include "utils.h"
-
 namespace symbolic {
     template <class>
     struct symbol_id

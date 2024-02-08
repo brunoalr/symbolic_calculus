@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "constraints.h"
 #include "formula.h"
 #include "symbol.h"
 #include "symbolic_expression.h"

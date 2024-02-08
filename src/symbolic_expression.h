@@ -5,6 +5,7 @@
 #include <utility> // for std::forward, std::index_sequence_for
 
 #include "substitution.h"
+#include "traits.h"
 
 namespace symbolic
 {
