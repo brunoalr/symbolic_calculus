@@ -1,0 +1,31 @@
+name: Build
+
+on:
+  pull_request:
+  workflow_call:
+
+jobs:
+    build:
+        name: Build
+        strategy:
+            fail-fast: false
+            matrix:
+                os: [ ubuntu-latest, macos-13, windows-latest ]
+        runs-on: ${{ matrix.os }}
+        steps:
+            - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+              with:
+                fetch-depth: 1
+                fetch-tags: true
+
+            - name: Build
+              shell: bash
+              run: |
+                cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+                cmake --build build --config Release -j 2
+
+            - name: Run program
+              shell: bash
+              working-directory: build
+              run: ./symbolic_calculus
+
