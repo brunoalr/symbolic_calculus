@@ -1,5 +1,10 @@
-#include <cmath>
+#include <cmath> // for std::sin etc
+#include <functional> // for std::compare_three_way etc
 #include <iostream>
+#include <memory> // for std::addressof
+#include <type_traits> // for std::type_identity, std::is_lvalue_reference_v, std::remove_reference_t, std::is_rvalue_reference_v<T>, std::conditional etc
+#include <utility> // for std::forward, std::index_sequence_for
+
 
 namespace symbolic
 {
@@ -142,7 +147,7 @@ namespace symbolic
     inline constexpr index_constant<I> index = {};
 
     // An indexed substitution element
-    template <std::size_t I, class  B>
+    template <std::size_t I, class B>
     struct substitution_element
     {
         // Types and constants
@@ -275,25 +280,25 @@ namespace symbolic
     };
 
     template <symbolic Lhs, symbolic Rhs>
-    constexpr symbolic_expression<std::plus<>, Lhs, Rhs> operator+(Lhs, Rhs)
+    constexpr symbolic_expression<std::plus<void>, Lhs, Rhs> operator+(Lhs, Rhs)
     {
         return {};
     }
 
     template <symbolic Lhs, symbolic Rhs>
-    constexpr symbolic_expression<std::minus<>, Lhs, Rhs> operator-(Lhs, Rhs)
+    constexpr symbolic_expression<std::minus<void>, Lhs, Rhs> operator-(Lhs, Rhs)
     {
         return {};
     }
 
     template <symbolic Lhs, symbolic Rhs>
-    constexpr symbolic_expression<std::multiplies<>, Lhs, Rhs> operator*(Lhs, Rhs)
+    constexpr symbolic_expression<std::multiplies<void>, Lhs, Rhs> operator*(Lhs, Rhs)
     {
         return {};
     }
 
     template <symbolic Lhs, symbolic Rhs>
-    constexpr symbolic_expression<std::divides<>, Lhs, Rhs> operator/(Lhs, Rhs)
+    constexpr symbolic_expression<std::divides<void>, Lhs, Rhs> operator/(Lhs, Rhs)
     {
         return {};
     }
